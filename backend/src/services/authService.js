@@ -24,3 +24,25 @@ export const registerUser = async (userData) => {
 
     return user;
 };
+
+export const loginUser = async (userData) => {
+    const { email, password } = userData;
+
+    if (!email || !password) {
+        throw new Error("Email and password are required");
+    }
+
+    const user = await User.findOne({ email });
+
+    if (!user) {
+        throw new Error("Invalid email or password");
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+        throw new Error("Invalid email or password");
+    }
+
+    return user;
+};
