@@ -59,3 +59,15 @@ export const deleteVehicle = async (id) => {
     }
 
 };
+
+export const purchaseVehicle = async (id) => {
+
+    const vehicle = await Vehicle.findById(id);
+
+    vehicle.quantityInStock--;
+
+    await vehicle.save();
+
+    return vehicle;
+
+};
