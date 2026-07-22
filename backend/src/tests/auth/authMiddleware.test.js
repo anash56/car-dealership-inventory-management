@@ -7,4 +7,12 @@ describe("Authentication Middleware", () => {
 
         expect(response.status).toBe(401);
     });
+
+    it("should return 401 when an invalid token is provided", async () => {
+        const response = await request(app)
+            .get("/protected")
+            .set("Authorization", "Bearer invalid-token");
+
+        expect(response.status).toBe(401);
+    });
 });
