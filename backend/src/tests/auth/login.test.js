@@ -25,6 +25,21 @@ describe("User Login", () => {
         expect(response.status).toBe(200);
     });
 
+    it("should return 401 when email does not exist", async () => {
+        const response = await request(app)
+            .post("/api/auth/login")
+            .send({
+                email: "unknown@gmail.com",
+                password: "123456",
+            });
+
+        expect(response.status).toBe(401);
+
+        expect(response.body).toEqual({
+            message: "Invalid email or password",
+        });
+    });
+
     it("should return 401 when password is incorrect", async () => {
         const user = {
             name: "John Doe",
