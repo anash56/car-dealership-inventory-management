@@ -1,11 +1,8 @@
 import express from "express";
+import { register } from "../controllers/authController.js";
 
 const router = express.Router();
 
-router.post("/register", (req, res) => {
-    res.status(201).json({
-        message: "User registered successfully",
-    });
-});
+router.post("/register", register);
 
 export default router;

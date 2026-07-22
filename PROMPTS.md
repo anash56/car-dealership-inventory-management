@@ -75,3 +75,22 @@ Help me implement the minimum code required to pass the first user registration 
 - Returned a `201 Created` response with the expected success message.
 - All existing tests passed successfully.
 - Completed the Green phase of the first TDD cycle.
+
+---
+
+## Session 5 - User Registration (REFACTOR)
+
+### User Prompt
+Help me refactor the user registration implementation after completing the Green phase while keeping all tests passing.
+
+### AI Assistance
+- Explained the purpose of the Refactor phase in TDD.
+- Recommended separating routing from request handling by introducing a controller.
+- Guided the extraction of the registration logic into an authentication controller.
+- Ensured the application's behavior remained unchanged after refactoring.
+
+### Outcome
+- Introduced an authentication controller.
+- Simplified the authentication routes.
+- Preserved the existing API behavior.
+- All tests continued to pass successfully.
