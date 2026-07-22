@@ -297,3 +297,22 @@ Implement authentication middleware using TDD that denies access to protected ro
 ### Outcome
 - Protected routes now reject unauthenticated requests.
 - Middleware is ready for JWT verification in the next step.
+
+---
+
+## Session 16 - JWT Verification
+
+### User Prompt
+Implement JWT verification in the authentication middleware using TDD.
+
+### AI Assistance
+- Added a failing test for requests containing an invalid JWT.
+- Implemented JWT verification using `jsonwebtoken`.
+- Extracted the token from the Authorization header.
+- Returned HTTP 401 Unauthorized when verification failed.
+- Confirmed no refactoring was required.
+
+### Outcome
+- Middleware now verifies JWTs.
+- Invalid tokens are rejected with HTTP 401.
+- Middleware is ready to accept valid authenticated requests.
