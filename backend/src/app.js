@@ -1,6 +1,7 @@
 import express from "express";
 import authRoutes from "./routes/authRoutes.js";
 import { authenticate } from "./middleware/authMiddleware.js";
+import { adminOnly } from "./middleware/adminMiddleware.js";
 
 const app = express();
 
@@ -18,6 +19,17 @@ app.get("/protected", authenticate, (req, res) => {
         user: req.user,
     });
 });
+
+app.delete(
+    "/admin-test",
+    authenticate,
+    adminOnly,
+    (req, res) => {
+        return res.status(200).json({
+            message: "Admin route",
+        });
+    }
+);
 
 app.use("/api/auth", authRoutes);
 
