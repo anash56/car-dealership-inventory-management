@@ -161,3 +161,24 @@ Help me implement input validation for user registration using Test-Driven Devel
 - Returned `400 Bad Request` with an appropriate error message.
 - Preserved the separation between controller and service layers.
 - All tests passed successfully.
+
+---
+
+## Session 9 - Password Hashing (RED → GREEN → REFACTOR)
+
+### User Prompt
+Help me implement secure password hashing during user registration using Test-Driven Development (TDD). Explain why password hashing belongs in the service layer and verify it using bcrypt.
+
+### AI Assistance
+- Explained the security risks of storing plain text passwords.
+- Explained why password hashing is business logic and belongs in the service layer.
+- Guided the creation of a failing integration test to verify password hashing.
+- Explained how `bcrypt.compare()` verifies hashed passwords.
+- Assisted in implementing password hashing using `bcrypt.hash()`.
+- Reviewed the implementation and confirmed no refactoring was required.
+
+### Outcome
+- Passwords are hashed before being stored in MongoDB.
+- Plain text passwords are never persisted.
+- Registration tests verify hashing using `bcrypt.compare()`.
+- All tests passed successfully.
