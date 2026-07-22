@@ -139,3 +139,25 @@ Help me implement duplicate email validation for user registration using Test-Dr
 - Returned `409 Conflict` with an appropriate error message.
 - Preserved the separation between controller and service layers.
 - All tests passed successfully.
+
+---
+
+## Session 8 - Registration Input Validation (RED → GREEN → REFACTOR)
+
+### User Prompt
+Help me implement input validation for user registration using Test-Driven Development (TDD). Follow the Red → Green → Refactor cycle while keeping validation logic inside the service layer.
+
+### AI Assistance
+- Explained why input validation is a business rule and should be handled in the service layer.
+- Guided the creation of a failing integration test for missing required registration fields.
+- Recommended returning `400 Bad Request` when required fields are missing.
+- Assisted in implementing validation for the `name`, `email`, and `password` fields.
+- Updated the controller to return the appropriate HTTP response for validation failures.
+- Reviewed the implementation and confirmed that no additional refactoring was required.
+
+### Outcome
+- Added a validation test for user registration.
+- Prevented registration when required fields are missing.
+- Returned `400 Bad Request` with an appropriate error message.
+- Preserved the separation between controller and service layers.
+- All tests passed successfully.
