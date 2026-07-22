@@ -37,3 +37,9 @@ export const searchVehicles = async (query) => {
 
     return await Vehicle.find(filter).sort({ createdAt: 1 });
 };
+
+export const updateVehicle = async (id, vehicleData) => {
+    return await Vehicle.findByIdAndUpdate(id, vehicleData, {
+        new: true,
+    });
+};

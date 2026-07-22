@@ -2,6 +2,7 @@ import {
     createVehicle,
     getAllVehicles,
     searchVehicles,
+    updateVehicle,
 } from "../services/vehicleService.js";
 
 export const createVehicleController = async (req, res) => {
@@ -39,6 +40,20 @@ export const searchVehiclesController = async (req, res) => {
 
         return res.status(200).json({
             vehicles,
+        });
+    } catch (error) {
+        return res.status(500).json({
+            message: error.message,
+        });
+    }
+};
+
+export const updateVehicleController = async (req, res) => {
+    try {
+        const updatedVehicle = await updateVehicle(req.params.id, req.body);
+
+        return res.status(200).json({
+            vehicle: updatedVehicle,
         });
     } catch (error) {
         return res.status(500).json({

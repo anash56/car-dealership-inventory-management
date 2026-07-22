@@ -1,3 +1,6 @@
+import request from "supertest";
+import app from "../../app.js";
+
 it("should update a vehicle", async () => {
 
     const user = {
