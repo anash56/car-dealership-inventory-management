@@ -573,3 +573,22 @@ Implement the protected vehicle purchase endpoint using TDD so that an authentic
 - The vehicle's `quantityInStock` decreases by one after a successful purchase.
 - The updated vehicle is returned in the response.
 - The updated quantity is successfully persisted in the database.
+
+---
+
+## Session 29 - Purchase Vehicle (Vehicle Not Found)
+
+### User Prompt
+Implement the purchase vehicle endpoint using TDD so that attempting to purchase a non-existent vehicle returns a 404 Not Found response.
+
+### AI Assistance
+- Added a failing integration test to verify that purchasing a non-existent vehicle returns a 404 response.
+- Updated the `purchaseVehicle` service to check whether the requested vehicle exists before updating its inventory.
+- Threw a `Vehicle not found` error when the vehicle was not found.
+- Updated the `purchaseVehicleController` to return a `404 Not Found` response when the service throws a `Vehicle not found` error.
+- Reviewed the implementation and confirmed no refactoring was required.
+
+### Outcome
+- The purchase endpoint now returns `404 Not Found` when the requested vehicle does not exist.
+- Existing purchase functionality continues to work correctly for valid vehicles.
+- The project maintains consistent error handling across the Update, Delete, and Purchase endpoints.
