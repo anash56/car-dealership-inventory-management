@@ -334,3 +334,24 @@ Enhance the authentication middleware using TDD so that authenticated user infor
 - Valid JWTs are successfully decoded.
 - Authenticated user information is available through `req.user`.
 - Protected controllers can identify the currently authenticated user without re-verifying the token.
+
+---
+
+## Session 18 - Admin Authorization Middleware
+
+### User Prompt
+Implement admin authorization using TDD so that only users with the `admin` role can access admin-only endpoints.
+
+### AI Assistance
+- Added a failing test to verify that non-admin users receive **403 Forbidden** when accessing an admin-only route.
+- Added a `role` field to the `User` schema with a default value of `"user"`.
+- Included the user's `role` in the JWT payload during login.
+- Created an `adminOnly` middleware to authorize requests based on `req.user.role`.
+- Protected a temporary `/admin-test` route using both `authenticate` and `adminOnly`.
+- Reviewed the implementation and confirmed no refactoring was required.
+
+### Outcome
+- Every user has a role (`user` or `admin`).
+- The authenticated user's role is available through `req.user.role`.
+- Non-admin users receive **403 Forbidden** when accessing admin-only endpoints.
+- The application is ready to protect admin-only routes such as vehicle deletion and inventory restocking.
