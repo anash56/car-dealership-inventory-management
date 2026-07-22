@@ -94,3 +94,26 @@ Help me refactor the user registration implementation after completing the Green
 - Simplified the authentication routes.
 - Preserved the existing API behavior.
 - All tests continued to pass successfully.
+
+---
+
+## Session 6 - User Registration Persistence (RED → GREEN → REFACTOR)
+
+### User Prompt
+Help me implement user registration persistence using Test-Driven Development (TDD). Follow the Red → Green → Refactor cycle while maintaining a clean architecture with separate controller and service layers.
+
+### AI Assistance
+- Explained why persistence should be implemented as the next registration behavior.
+- Guided the creation of a failing integration test to verify that a registered user is stored in MongoDB.
+- Assisted in resolving the `mongodb-memory-server` setup issue by switching to an Atlas-backed test database for this assessment.
+- Recommended introducing an `AuthService` to keep business logic separate from the controller.
+- Guided the implementation of the minimum code required to save a user in MongoDB.
+- Reviewed the implementation for possible refactoring and confirmed no further changes were necessary.
+
+### Outcome
+- Added a persistence test for user registration.
+- Implemented user persistence using the `User` model.
+- Introduced the `AuthService` layer.
+- Kept the controller focused on handling HTTP requests and responses.
+- All tests passed successfully.
+- Completed the Red → Green → Refactor cycle for user registration persistence.
