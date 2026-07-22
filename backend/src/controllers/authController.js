@@ -28,10 +28,11 @@ export const register = async (req, res) => {
 
 export const login = async (req, res) => {
     try {
-        await loginUser(req.body);
+        const token = await loginUser(req.body);
 
         return res.status(200).json({
             message: "Login successful",
+            token,
         });
     } catch (error) {
         if (error.message === "Email and password are required") {
