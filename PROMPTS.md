@@ -453,3 +453,23 @@ Extend the vehicle search endpoint using TDD so that authenticated users can sea
 - Authenticated users can search vehicles by category.
 - Matching vehicles are returned successfully.
 - The API returns **200 OK** with the filtered vehicle list.
+
+---
+
+## Session 24 - Search Vehicles by Price Range
+
+### User Prompt
+Extend the vehicle search endpoint using TDD so that authenticated users can search vehicles by price range.
+
+### AI Assistance
+- Added a failing test to verify that authenticated users can search vehicles within a specified price range.
+- Extended the dynamic MongoDB filter to support `minPrice` and `maxPrice` query parameters.
+- Converted query parameters to numbers before filtering.
+- Reused the existing search service, controller, and route.
+- Reviewed the implementation and confirmed no refactoring was required.
+
+### Outcome
+- Authenticated users can search vehicles within a specified price range.
+- Matching vehicles are returned successfully.
+- The API returns **200 OK** with the filtered vehicle list.
+- The search endpoint now fully supports searching by make, model, category, and price range.
