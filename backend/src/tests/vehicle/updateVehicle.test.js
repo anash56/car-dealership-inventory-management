@@ -1,5 +1,6 @@
 import request from "supertest";
 import app from "../../app.js";
+import mongoose from "mongoose";
 
 it("should update a vehicle", async () => {
 
@@ -52,5 +53,41 @@ it("should update a vehicle", async () => {
     expect(updateResponse.body.vehicle.category).toBe("Sedan");
     expect(updateResponse.body.vehicle.price).toBe(1800000);
     expect(updateResponse.body.vehicle.quantityInStock).toBe(15);
+
+});
+
+
+it("should return 404 when vehicle does not exist", async () => {
+
+    const user = {
+        name: "John",
+        email: "john@example.com",
+        password: "password123"
+    };
+
+    await request(app)
+        .post("/api/auth/register")
+        .send(user);
+
+    const loginResponse = await request(app)
+        .post("/api/auth/login")
+        .send({
+            email: user.email,
+            password: user.password
+        });
+
+    const token = loginResponse.body.token;
+
+    const fakeVehicleId = new mongoose.Types.ObjectId();
+
+    const response = await request(app)
+        .put(`/api/vehicles/${fakeVehicleId}`)
+        .set("Authorization", `Bearer ${token}`)
+        .send({
+            make: "Honda"
+        });
+
+    expect(response.status).toBe(404);
+    expect(response.body.message).toBe("Vehicle not found");
 
 });
