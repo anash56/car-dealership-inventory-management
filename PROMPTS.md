@@ -117,3 +117,25 @@ Help me implement user registration persistence using Test-Driven Development (T
 - Kept the controller focused on handling HTTP requests and responses.
 - All tests passed successfully.
 - Completed the Red → Green → Refactor cycle for user registration persistence.
+
+---
+
+## Session 7 - Duplicate Email Registration (RED → GREEN → REFACTOR)
+
+### User Prompt
+Help me implement duplicate email validation for user registration using Test-Driven Development (TDD). Follow the Red → Green → Refactor cycle while keeping business logic separate from the controller.
+
+### AI Assistance
+- Explained why duplicate email validation is a business rule.
+- Guided the creation of a failing integration test for duplicate email registration.
+- Recommended returning `409 Conflict` for duplicate email requests.
+- Assisted in implementing duplicate email validation inside the `AuthService`.
+- Guided the controller to return the appropriate HTTP response.
+- Reviewed the implementation and confirmed that no additional refactoring was required.
+
+### Outcome
+- Added a duplicate email registration test.
+- Prevented users from registering with an existing email.
+- Returned `409 Conflict` with an appropriate error message.
+- Preserved the separation between controller and service layers.
+- All tests passed successfully.
