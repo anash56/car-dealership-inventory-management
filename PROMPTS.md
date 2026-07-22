@@ -376,3 +376,23 @@ Implement the vehicle creation endpoint using TDD so that authenticated users ca
 - Vehicle information is stored in MongoDB.
 - The API returns **201 Created** along with the newly created vehicle.
 - The application is ready for vehicle retrieval, search, update, and deletion features.
+
+---
+
+## Session 20 - Get All Vehicles
+
+### User Prompt
+Implement the vehicle retrieval endpoint using TDD so that authenticated users can retrieve all vehicles.
+
+### AI Assistance
+- Added a failing test to verify that authenticated users can retrieve all vehicles.
+- Implemented the vehicle retrieval service using `Vehicle.find()` with deterministic sorting.
+- Created the vehicle retrieval controller.
+- Added the protected `GET /api/vehicles` route using the `authenticate` middleware.
+- Reviewed the implementation and confirmed no refactoring was required.
+
+### Outcome
+- Authenticated users can retrieve all vehicles.
+- Vehicles are returned in a consistent order.
+- The API returns **200 OK** with the list of vehicles.
+- The application is ready for vehicle search, update, and deletion features.
