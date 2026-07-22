@@ -355,3 +355,24 @@ Implement admin authorization using TDD so that only users with the `admin` role
 - The authenticated user's role is available through `req.user.role`.
 - Non-admin users receive **403 Forbidden** when accessing admin-only endpoints.
 - The application is ready to protect admin-only routes such as vehicle deletion and inventory restocking.
+
+---
+
+## Session 19 - Create Vehicle
+
+### User Prompt
+Implement the vehicle creation endpoint using TDD so that authenticated users can create a new vehicle.
+
+### AI Assistance
+- Added a failing test to verify that an authenticated user can create a vehicle.
+- Created the `Vehicle` model with the required fields: make, model, category, price, and quantity in stock.
+- Implemented the vehicle creation service to persist vehicle data.
+- Created the vehicle controller to handle incoming requests and return the created vehicle.
+- Added the protected `POST /api/vehicles` route using the `authenticate` middleware.
+- Reviewed the implementation and confirmed no refactoring was required.
+
+### Outcome
+- Authenticated users can successfully create vehicles.
+- Vehicle information is stored in MongoDB.
+- The API returns **201 Created** along with the newly created vehicle.
+- The application is ready for vehicle retrieval, search, update, and deletion features.
