@@ -24,4 +24,29 @@ describe("User Login", () => {
 
         expect(response.status).toBe(200);
     });
+
+    it("should return 401 when password is incorrect", async () => {
+        const user = {
+            name: "John Doe",
+            email: "john@example.com",
+            password: "password123",
+        };
+
+        await request(app)
+            .post("/api/auth/register")
+            .send(user);
+
+        const response = await request(app)
+            .post("/api/auth/login")
+            .send({
+                email: user.email,
+                password: "wrongpassword",
+            });
+
+        expect(response.status).toBe(401);
+
+        expect(response.body).toEqual({
+            message: "Invalid email or password",
+        });
+    });
 });
