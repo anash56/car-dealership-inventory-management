@@ -473,3 +473,41 @@ Extend the vehicle search endpoint using TDD so that authenticated users can sea
 - Matching vehicles are returned successfully.
 - The API returns **200 OK** with the filtered vehicle list.
 - The search endpoint now fully supports searching by make, model, category, and price range.
+
+---
+
+## Session 25 - Update Vehicle
+
+### User Prompt
+Implement the protected vehicle update endpoint using TDD so that authenticated users can update a vehicle's details.
+
+### AI Assistance
+- Added a failing integration test to verify that authenticated users can update a vehicle.
+- Implemented the protected `PUT /api/vehicles/:id` endpoint using the `authenticate` middleware.
+- Implemented the `updateVehicleController`.
+- Implemented the `updateVehicle` service using `findByIdAndUpdate()`.
+- Used `{ new: true }` to return the updated vehicle document.
+- Reviewed the implementation and confirmed no refactoring was required.
+
+### Outcome
+- Authenticated users can successfully update a vehicle's details.
+- Updated vehicles are returned successfully.
+- The API returns **200 OK** with the updated vehicle.
+
+---
+
+## Session 26 - Update Vehicle Not Found
+
+### User Prompt
+Extend the vehicle update endpoint using TDD so that updating a non-existent vehicle returns **404 Not Found**.
+
+### AI Assistance
+- Added a failing integration test to verify that updating a non-existent vehicle returns **404 Not Found**.
+- Updated the `updateVehicle` service to throw an error when the requested vehicle does not exist.
+- Updated the `updateVehicleController` to return **404 Not Found** for missing vehicles while continuing to return **500 Internal Server Error** for unexpected errors.
+- Reviewed the implementation and confirmed no refactoring was required.
+
+### Outcome
+- Requests to update a non-existent vehicle return **404 Not Found**.
+- Existing vehicles continue to update successfully.
+- The API now correctly handles both successful updates and missing vehicle scenarios.
