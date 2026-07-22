@@ -316,3 +316,21 @@ Implement JWT verification in the authentication middleware using TDD.
 - Middleware now verifies JWTs.
 - Invalid tokens are rejected with HTTP 401.
 - Middleware is ready to accept valid authenticated requests.
+
+---
+
+## Session 17 - Attach Authenticated User
+
+### User Prompt
+Enhance the authentication middleware using TDD so that authenticated user information is attached to the request object.
+
+### AI Assistance
+- Added a failing test to verify that the decoded JWT payload is attached to `req.user`.
+- Updated the authentication middleware to store the decoded JWT payload on the request object.
+- Allowed protected routes to access authenticated user information.
+- Reviewed the implementation and confirmed no refactoring was required.
+
+### Outcome
+- Valid JWTs are successfully decoded.
+- Authenticated user information is available through `req.user`.
+- Protected controllers can identify the currently authenticated user without re-verifying the token.
