@@ -592,3 +592,24 @@ Implement the purchase vehicle endpoint using TDD so that attempting to purchase
 - The purchase endpoint now returns `404 Not Found` when the requested vehicle does not exist.
 - Existing purchase functionality continues to work correctly for valid vehicles.
 - The project maintains consistent error handling across the Update, Delete, and Purchase endpoints.
+
+---
+
+## Session 30 - Purchase Vehicle (Out of Stock)
+
+### User Prompt
+Implement the purchase vehicle endpoint using TDD so that purchasing a vehicle with no available stock returns a 400 Bad Request response.
+
+### AI Assistance
+- Added a failing integration test to verify that purchasing a vehicle with zero stock returns a `400 Bad Request` response.
+- Updated the `purchaseVehicle` service to validate the vehicle's available stock before processing the purchase.
+- Threw a `Vehicle is out of stock` error when the vehicle's `quantityInStock` was zero or less.
+- Updated the `purchaseVehicleController` to return a `400 Bad Request` response when the service throws a `Vehicle is out of stock` error.
+- Verified that the vehicle quantity remains unchanged when a purchase request is rejected.
+- Reviewed the implementation and confirmed no refactoring was required.
+
+### Outcome
+- The purchase endpoint now prevents users from purchasing vehicles that are out of stock.
+- The API returns `400 Bad Request` with an appropriate error message when inventory is unavailable.
+- Vehicle inventory remains unchanged after a failed purchase attempt.
+- Purchase functionality now correctly handles success, vehicle not found, and out-of-stock scenarios.
