@@ -1,19 +1,25 @@
 import request from "supertest";
 import app from "../../app.js";
-import Vehicle from "../../models/vehicle.model.js";
+import User from "../../models/User.js";
+import Vehicle from "../../models/Vehicle.js";
 
 it("should delete a vehicle", async () => {
 
     const admin = {
         name: "Admin",
         email: "admin@example.com",
-        password: "password123",
-        role: "admin"
+        password: "password123"
     };
 
     await request(app)
         .post("/api/auth/register")
         .send(admin);
+
+    // Promote the registered user to admin
+    await User.findOneAndUpdate(
+        { email: admin.email },
+        { role: "admin" }
+    );
 
     const loginResponse = await request(app)
         .post("/api/auth/login")

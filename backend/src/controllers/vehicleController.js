@@ -3,6 +3,7 @@ import {
     getAllVehicles,
     searchVehicles,
     updateVehicle,
+    deleteVehicle,
 } from "../services/vehicleService.js";
 
 export const createVehicleController = async (req, res) => {
@@ -66,5 +67,23 @@ export const updateVehicleController = async (req, res) => {
         return res.status(500).json({
             message: error.message,
         });
+    }
+};
+
+export const deleteVehicleController = async (req, res) => {
+    try {
+
+        await deleteVehicle(req.params.id);
+
+        return res.status(200).json({
+            message: "Vehicle deleted successfully"
+        });
+
+    } catch (error) {
+
+        return res.status(500).json({
+            message: error.message
+        });
+
     }
 };

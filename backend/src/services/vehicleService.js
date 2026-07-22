@@ -49,3 +49,9 @@ export const updateVehicle = async (id, vehicleData) => {
 
     return updatedVehicle;
 };
+
+export const deleteVehicle = async (id) => {
+
+    await Vehicle.findByIdAndDelete(id);
+
+};
