@@ -416,3 +416,22 @@ Implement the vehicle search endpoint using TDD so that authenticated users can 
 - Matching vehicles are returned successfully.
 - The API returns **200 OK** with the filtered vehicle list.
 - The search implementation is ready to be extended for model, category, and price range.
+
+---
+
+## Session 22 - Search Vehicles by Model
+
+### User Prompt
+Extend the vehicle search endpoint using TDD so that authenticated users can search vehicles by model.
+
+### AI Assistance
+- Added a failing test to verify that authenticated users can search vehicles by model.
+- Extended the dynamic MongoDB filter to support the `model` query parameter.
+- Reused the existing search service, controller, and route.
+- Reviewed the implementation and confirmed no refactoring was required.
+
+### Outcome
+- Authenticated users can search vehicles by model.
+- Matching vehicles are returned successfully.
+- The API returns **200 OK** with the filtered vehicle list.
+- The search implementation is ready to support category and price range.
