@@ -92,4 +92,28 @@ describe("User Login", () => {
             message: "Email and password are required",
         });
     });
+
+    it("should return a JWT token after successful login", async () => {
+        const user = {
+            name: "Anash",
+            email: "anash@gmail.com",
+            password: "123456",
+        };
+
+        await request(app)
+            .post("/api/auth/register")
+            .send(user);
+
+        const response = await request(app)
+            .post("/api/auth/login")
+            .send({
+                email: user.email,
+                password: user.password,
+            });
+
+        expect(response.status).toBe(200);
+
+        expect(response.body).toHaveProperty("token");
+        expect(typeof response.body.token).toBe("string");
+    });
 });
