@@ -204,3 +204,20 @@ Help me implement the user login endpoint using Test-Driven Development (TDD). F
 - Users can log in with valid email and password.
 - Passwords are verified securely using bcrypt.
 - All tests passed successfully.
+
+---
+
+## Session 11 - Login with Invalid Email
+
+### User Prompt
+Add a test to verify that login fails when the email does not exist.
+
+### AI Assistance
+- Added an integration test for login with a non-existent email.
+- Verified that the existing implementation already handled this scenario.
+- Confirmed that the API returns a generic authentication error to prevent user enumeration.
+
+### Outcome
+- Login returns `401 Unauthorized` for unknown email addresses.
+- Response message: `Invalid email or password`.
+- No production code changes were required.
