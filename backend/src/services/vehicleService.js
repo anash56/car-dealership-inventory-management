@@ -39,7 +39,13 @@ export const searchVehicles = async (query) => {
 };
 
 export const updateVehicle = async (id, vehicleData) => {
-    return await Vehicle.findByIdAndUpdate(id, vehicleData, {
+    const updatedVehicle = await Vehicle.findByIdAndUpdate(id, vehicleData, {
         new: true,
     });
+
+    if (!updatedVehicle) {
+        throw new Error("Vehicle not found");
+    }
+
+    return updatedVehicle;
 };
