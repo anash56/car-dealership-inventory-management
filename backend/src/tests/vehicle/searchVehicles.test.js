@@ -114,4 +114,51 @@ describe("Search Vehicles", () => {
         expect(response.body.vehicles).toHaveLength(1);
         expect(response.body.vehicles[0].category).toBe("SUV");
     });
+
+    it("should return vehicles within the price range", async () => {
+        await Vehicle.create([
+            {
+                make: "Toyota",
+                model: "Fortuner",
+                category: "SUV",
+                price: 4500000,
+                quantityInStock: 5,
+            },
+            {
+                make: "Honda",
+                model: "City",
+                category: "Sedan",
+                price: 1500000,
+                quantityInStock: 3,
+            },
+            {
+                make: "BMW",
+                model: "X5",
+                category: "SUV",
+                price: 8000000,
+                quantityInStock: 2,
+            },
+        ]);
+
+        const token = jwt.sign(
+            {
+                id: "123",
+                email: "user@example.com",
+                role: "user",
+            },
+            process.env.JWT_SECRET
+        );
+
+        const response = await request(app)
+            .get("/api/vehicles/search")
+            .query({
+                minPrice: 2000000,
+                maxPrice: 5000000,
+            })
+            .set("Authorization", `Bearer ${token}`);
+
+        expect(response.status).toBe(200);
+        expect(response.body.vehicles).toHaveLength(1);
+        expect(response.body.vehicles[0].make).toBe("Toyota");
+    });
 });
