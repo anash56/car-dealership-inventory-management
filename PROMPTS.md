@@ -533,3 +533,22 @@ Implement the protected, admin-only vehicle deletion endpoint using TDD so that 
 - Deleted vehicles are permanently removed from the database.
 - The API returns **200 OK** with a success message after a successful deletion.
 - The endpoint is protected so that only authenticated administrators can perform vehicle deletion.
+
+---
+
+## Session 27 - Delete Vehicle Not Found Handling
+
+### User Prompt
+Enhance the vehicle deletion endpoint using TDD so that attempting to delete a non-existent vehicle returns **404 Not Found** instead of **500 Internal Server Error**.
+
+### AI Assistance
+- Added a failing integration test to verify that deleting a non-existent vehicle returns **404 Not Found**.
+- Used a valid but non-existent MongoDB `ObjectId` to test the not-found scenario.
+- Updated the `deleteVehicle` service to throw an error when the requested vehicle does not exist.
+- Updated the `deleteVehicleController` to return **404 Not Found** for missing vehicles while continuing to return **500 Internal Server Error** for unexpected errors.
+- Reviewed the implementation and confirmed no refactoring was required.
+
+### Outcome
+- Requests to delete a non-existent vehicle now return **404 Not Found**.
+- Existing vehicle deletions continue to return **200 OK**.
+- Unexpected server errors continue to return **500 Internal Server Error**.
