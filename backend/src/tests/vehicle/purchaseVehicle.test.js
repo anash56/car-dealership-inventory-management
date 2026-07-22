@@ -81,3 +81,50 @@ it("should return 404 when purchasing a non-existent vehicle", async () => {
     expect(response.body.message).toBe("Vehicle not found");
 
 });
+
+it("should return 400 when vehicle is out of stock", async () => {
+
+    const user = {
+        name: "John",
+        email: "john@example.com",
+        password: "password123"
+    };
+
+    await request(app)
+        .post("/api/auth/register")
+        .send(user);
+
+    const loginResponse = await request(app)
+        .post("/api/auth/login")
+        .send({
+            email: user.email,
+            password: user.password
+        });
+
+    const token = loginResponse.body.token;
+
+    const createResponse = await request(app)
+        .post("/api/vehicles")
+        .set("Authorization", `Bearer ${token}`)
+        .send({
+            make: "Toyota",
+            model: "Fortuner",
+            category: "SUV",
+            price: 4500000,
+            quantityInStock: 0
+        });
+
+    const vehicleId = createResponse.body.vehicle._id;
+
+    const purchaseResponse = await request(app)
+        .post(`/api/vehicles/${vehicleId}/purchase`)
+        .set("Authorization", `Bearer ${token}`);
+
+    expect(purchaseResponse.status).toBe(400);
+    expect(purchaseResponse.body.message).toBe("Vehicle is out of stock");
+
+    const vehicle = await Vehicle.findById(vehicleId);
+
+    expect(vehicle.quantityInStock).toBe(0);
+
+});
