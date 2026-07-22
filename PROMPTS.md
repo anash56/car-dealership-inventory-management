@@ -552,3 +552,24 @@ Enhance the vehicle deletion endpoint using TDD so that attempting to delete a n
 - Requests to delete a non-existent vehicle now return **404 Not Found**.
 - Existing vehicle deletions continue to return **200 OK**.
 - Unexpected server errors continue to return **500 Internal Server Error**.
+
+---
+
+## Session 28 - Purchase Vehicle
+
+### User Prompt
+Implement the protected vehicle purchase endpoint using TDD so that an authenticated user can purchase a vehicle, decreasing its quantity in stock.
+
+### AI Assistance
+- Added a failing integration test to verify that an authenticated user can purchase a vehicle.
+- Verified that the vehicle quantity is updated both in the API response and in the database.
+- Implemented the protected `POST /api/vehicles/:id/purchase` endpoint using the `authenticate` middleware.
+- Implemented the `purchaseVehicleController`.
+- Implemented the `purchaseVehicle` service by retrieving the vehicle, decreasing `quantityInStock` by one, saving the updated document, and returning the updated vehicle.
+- Reviewed the implementation and confirmed no refactoring was required.
+
+### Outcome
+- Authenticated users can successfully purchase a vehicle.
+- The vehicle's `quantityInStock` decreases by one after a successful purchase.
+- The updated vehicle is returned in the response.
+- The updated quantity is successfully persisted in the database.
