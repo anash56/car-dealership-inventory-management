@@ -1,3 +1,4 @@
+import bcrypt from "bcryptjs";
 import User from "../models/User.js";
 
 export const registerUser = async (userData) => {
@@ -13,7 +14,13 @@ export const registerUser = async (userData) => {
         throw new Error("Email already exists");
     }
 
-    const user = await User.create(userData);
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const user = await User.create({
+        name,
+        email,
+        password: hashedPassword,
+    });
 
     return user;
 };
