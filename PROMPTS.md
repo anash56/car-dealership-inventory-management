@@ -279,3 +279,21 @@ Implement JWT token generation for successful user login using Test-Driven Devel
 - Token generation uses `JWT_SECRET` from environment variables.
 - Authentication is ready for protected routes.
 - All tests passed successfully.
+
+---
+
+## Session 15 - Authentication Middleware (Missing Token)
+
+### User Prompt
+Implement authentication middleware using TDD that denies access to protected routes when no JWT token is provided.
+
+### AI Assistance
+- Added a failing test for accessing a protected route without an Authorization header.
+- Created authentication middleware.
+- Checked for the presence of the Authorization header.
+- Returned HTTP 401 Unauthorized when the header was missing.
+- Confirmed no refactoring was required.
+
+### Outcome
+- Protected routes now reject unauthenticated requests.
+- Middleware is ready for JWT verification in the next step.
