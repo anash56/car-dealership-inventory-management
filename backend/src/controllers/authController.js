@@ -8,6 +8,12 @@ export const register = async (req, res) => {
             message: "User registered successfully",
         });
     } catch (error) {
+        if (error.message === "Name, email and password are required") {
+            return res.status(400).json({
+                message: error.message,
+            });
+        }
+
         if (error.message === "Email already exists") {
             return res.status(409).json({
                 message: error.message,
