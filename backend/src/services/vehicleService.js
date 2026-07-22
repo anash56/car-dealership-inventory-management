@@ -68,6 +68,10 @@ export const purchaseVehicle = async (id) => {
         throw new Error("Vehicle not found");
     }
 
+    if (vehicle.quantityInStock <= 0) {
+        throw new Error("Vehicle is out of stock");
+    }
+
     vehicle.quantityInStock--;
 
     await vehicle.save();

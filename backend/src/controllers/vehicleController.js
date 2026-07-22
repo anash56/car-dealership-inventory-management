@@ -111,6 +111,13 @@ export const purchaseVehicleController = async (req, res) => {
             });
         }
 
+        if (error.message === "Vehicle is out of stock") {
+            return res.status(400).json({
+                message: error.message
+            });
+        }
+
+
         return res.status(500).json({
             message: error.message
         });
