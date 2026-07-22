@@ -15,5 +15,9 @@ export const searchVehicles = async (query) => {
         filter.make = query.make;
     }
 
+    if (query.model) {
+        filter.model = query.model;
+    }
+
     return await Vehicle.find(filter).sort({ createdAt: 1 });
 };
