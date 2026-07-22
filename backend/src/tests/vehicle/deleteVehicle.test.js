@@ -2,6 +2,7 @@ import request from "supertest";
 import app from "../../app.js";
 import User from "../../models/User.js";
 import Vehicle from "../../models/Vehicle.js";
+import mongoose from "mongoose";
 
 it("should delete a vehicle", async () => {
 
@@ -53,5 +54,42 @@ it("should delete a vehicle", async () => {
     const deletedVehicle = await Vehicle.findById(vehicleId);
 
     expect(deletedVehicle).toBeNull();
+
+});
+
+it("should return 404 when deleting a non-existent vehicle", async () => {
+
+    const admin = {
+        name: "Admin",
+        email: "admin@example.com",
+        password: "password123"
+    };
+
+    await request(app)
+        .post("/api/auth/register")
+        .send(admin);
+
+    await User.findOneAndUpdate(
+        { email: admin.email },
+        { role: "admin" }
+    );
+
+    const loginResponse = await request(app)
+        .post("/api/auth/login")
+        .send({
+            email: admin.email,
+            password: admin.password
+        });
+
+    const token = loginResponse.body.token;
+
+    const fakeVehicleId = new mongoose.Types.ObjectId();
+
+    const response = await request(app)
+        .delete(`/api/vehicles/${fakeVehicleId}`)
+        .set("Authorization", `Bearer ${token}`);
+
+    expect(response.status).toBe(404);
+    expect(response.body.message).toBe("Vehicle not found");
 
 });
