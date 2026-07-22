@@ -2,6 +2,7 @@ import express from "express";
 import authRoutes from "./routes/authRoutes.js";
 import { authenticate } from "./middleware/authMiddleware.js";
 import { adminOnly } from "./middleware/adminMiddleware.js";
+import vehicleRoutes from "./routes/vehicleRoutes.js";
 
 const app = express();
 
@@ -32,5 +33,6 @@ app.delete(
 );
 
 app.use("/api/auth", authRoutes);
+app.use("/api/vehicles", vehicleRoutes);
 
 export default app;
