@@ -221,3 +221,20 @@ Add a test to verify that login fails when the email does not exist.
 - Login returns `401 Unauthorized` for unknown email addresses.
 - Response message: `Invalid email or password`.
 - No production code changes were required.
+
+---
+
+## Session 12 - Login with Incorrect Password
+
+### User Prompt
+Add a test to verify that login fails when the password is incorrect.
+
+### AI Assistance
+- Added an integration test for login with an incorrect password.
+- Verified that the existing implementation already handled this scenario.
+- Confirmed that the API returns a generic authentication error to prevent user enumeration.
+
+### Outcome
+- Login returns `401 Unauthorized` for incorrect passwords.
+- Response message: `Invalid email or password`.
+- No production code changes were required.
