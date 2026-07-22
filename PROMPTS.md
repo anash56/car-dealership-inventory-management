@@ -238,3 +238,23 @@ Add a test to verify that login fails when the password is incorrect.
 - Login returns `401 Unauthorized` for incorrect passwords.
 - Response message: `Invalid email or password`.
 - No production code changes were required.
+
+---
+
+## Session 13 - Login Test Refactoring & Validation
+
+### User Prompt
+Refactor the login tests into a single test file and add validation tests for missing email and password.
+
+### AI Assistance
+- Consolidated all login scenarios into `login.test.js`.
+- Removed the separate `loginInvalidEmail.test.js` file.
+- Added integration tests for missing email and missing password.
+- Verified that the existing implementation already handled both validation scenarios.
+- Confirmed that the API returns `400 Bad Request` with an appropriate validation message for incomplete login requests.
+
+### Outcome
+- Improved test organization by keeping all login scenarios in one file.
+- Login returns `400 Bad Request` when email or password is missing.
+- Response message: `Email and password are required`.
+- No production code changes were required.
