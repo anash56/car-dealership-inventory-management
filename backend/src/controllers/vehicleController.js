@@ -81,9 +81,14 @@ export const deleteVehicleController = async (req, res) => {
 
     } catch (error) {
 
+        if (error.message === "Vehicle not found") {
+            return res.status(404).json({
+                message: error.message
+            });
+        }
+
         return res.status(500).json({
             message: error.message
         });
-
     }
 };

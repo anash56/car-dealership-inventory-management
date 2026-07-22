@@ -52,6 +52,10 @@ export const updateVehicle = async (id, vehicleData) => {
 
 export const deleteVehicle = async (id) => {
 
-    await Vehicle.findByIdAndDelete(id);
+    const deletedVehicle = await Vehicle.findByIdAndDelete(id);
+
+    if (!deletedVehicle) {
+        throw new Error("Vehicle not found");
+    }
 
 };
