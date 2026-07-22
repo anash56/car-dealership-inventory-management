@@ -182,3 +182,25 @@ Help me implement secure password hashing during user registration using Test-Dr
 - Plain text passwords are never persisted.
 - Registration tests verify hashing using `bcrypt.compare()`.
 - All tests passed successfully.
+
+---
+
+## Session 10 - User Login (RED → GREEN → REFACTOR)
+
+### User Prompt
+Help me implement the user login endpoint using Test-Driven Development (TDD). Follow the Red → Green → Refactor cycle while keeping authentication logic inside the service layer.
+
+### AI Assistance
+- Explained the login flow and authentication architecture.
+- Guided the creation of a failing integration test for successful user login.
+- Added the login route, controller, and service.
+- Implemented user lookup by email.
+- Implemented password verification using `bcrypt.compare()`.
+- Returned `200 OK` for successful authentication.
+- Reviewed the implementation and confirmed no refactoring was required.
+
+### Outcome
+- Added `POST /api/auth/login`.
+- Users can log in with valid email and password.
+- Passwords are verified securely using bcrypt.
+- All tests passed successfully.
