@@ -511,3 +511,25 @@ Extend the vehicle update endpoint using TDD so that updating a non-existent veh
 - Requests to update a non-existent vehicle return **404 Not Found**.
 - Existing vehicles continue to update successfully.
 - The API now correctly handles both successful updates and missing vehicle scenarios.
+
+---
+
+## Session 26 - Delete Vehicle
+
+### User Prompt
+Implement the protected, admin-only vehicle deletion endpoint using TDD so that an administrator can delete a vehicle from the inventory.
+
+### AI Assistance
+- Added a failing integration test to verify that an authenticated administrator can delete a vehicle.
+- Verified that the vehicle is actually removed from the database after deletion.
+- Promoted the test user to an administrator directly in the test database to satisfy the admin authorization requirement without weakening the registration flow.
+- Implemented the protected `DELETE /api/vehicles/:id` endpoint using the `authenticate` and `adminOnly` middlewares.
+- Implemented the `deleteVehicleController`.
+- Implemented the `deleteVehicle` service using `findByIdAndDelete()`.
+- Reviewed the implementation and confirmed no refactoring was required.
+
+### Outcome
+- Administrators can successfully delete existing vehicles.
+- Deleted vehicles are permanently removed from the database.
+- The API returns **200 OK** with a success message after a successful deletion.
+- The endpoint is protected so that only authenticated administrators can perform vehicle deletion.
