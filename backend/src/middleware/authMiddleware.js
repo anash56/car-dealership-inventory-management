@@ -1,3 +1,5 @@
+import jwt from "jsonwebtoken";
+
 export const authenticate = (req, res, next) => {
     const authHeader = req.headers.authorization;
 
@@ -7,5 +9,14 @@ export const authenticate = (req, res, next) => {
         });
     }
 
-    next();
+    const token = authHeader.split(" ")[1];
+
+    try {
+        jwt.verify(token, process.env.JWT_SECRET);
+        next();
+    } catch (error) {
+        return res.status(401).json({
+            message: "Unauthorized",
+        });
+    }
 };
