@@ -258,3 +258,24 @@ Refactor the login tests into a single test file and add validation tests for mi
 - Login returns `400 Bad Request` when email or password is missing.
 - Response message: `Email and password are required`.
 - No production code changes were required.
+
+---
+
+## Session 14 - JWT Token Generation
+
+### User Prompt
+Implement JWT token generation for successful user login using Test-Driven Development (TDD).
+
+### AI Assistance
+- Added a failing test to verify that successful login returns a JWT token.
+- Implemented JWT generation using `jsonwebtoken`.
+- Added `JWT_SECRET` configuration through environment variables.
+- Updated the login response to include the generated token.
+- Ensured the application loads environment variables during testing.
+- Reviewed the implementation and confirmed no refactoring was required.
+
+### Outcome
+- Successful login returns a JWT token.
+- Token generation uses `JWT_SECRET` from environment variables.
+- Authentication is ready for protected routes.
+- All tests passed successfully.
