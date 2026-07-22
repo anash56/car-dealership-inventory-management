@@ -396,3 +396,23 @@ Implement the vehicle retrieval endpoint using TDD so that authenticated users c
 - Vehicles are returned in a consistent order.
 - The API returns **200 OK** with the list of vehicles.
 - The application is ready for vehicle search, update, and deletion features.
+
+---
+
+## Session 21 - Search Vehicles by Make
+
+### User Prompt
+Implement the vehicle search endpoint using TDD so that authenticated users can search vehicles by make.
+
+### AI Assistance
+- Added a failing test to verify that authenticated users can search vehicles by make.
+- Implemented the vehicle search service using a dynamic MongoDB filter.
+- Created the vehicle search controller.
+- Added the protected `GET /api/vehicles/search` route using the `authenticate` middleware.
+- Reviewed the implementation and confirmed no refactoring was required.
+
+### Outcome
+- Authenticated users can search vehicles by make.
+- Matching vehicles are returned successfully.
+- The API returns **200 OK** with the filtered vehicle list.
+- The search implementation is ready to be extended for model, category, and price range.
