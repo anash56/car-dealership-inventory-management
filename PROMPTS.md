@@ -613,3 +613,23 @@ Implement the purchase vehicle endpoint using TDD so that purchasing a vehicle w
 - The API returns `400 Bad Request` with an appropriate error message when inventory is unavailable.
 - Vehicle inventory remains unchanged after a failed purchase attempt.
 - Purchase functionality now correctly handles success, vehicle not found, and out-of-stock scenarios.
+
+---
+
+## Session 31 - Restock Vehicle
+
+### User Prompt
+Implement the admin-only vehicle restock endpoint using TDD so that an administrator can restock a vehicle by increasing its quantity in stock.
+
+### AI Assistance
+- Added a failing integration test to verify that an administrator can successfully restock a vehicle.
+- Implemented the protected `POST /api/vehicles/:id/restock` endpoint using the `authenticate` and `adminOnly` middleware.
+- Implemented the `restockVehicleController`.
+- Implemented the `restockVehicle` service by retrieving the vehicle, increasing `quantityInStock` by one, saving the updated document, and returning the updated vehicle.
+- Reviewed the implementation and confirmed no refactoring was required.
+
+### Outcome
+- Administrators can successfully restock a vehicle.
+- The vehicle's `quantityInStock` increases by one after a successful restock.
+- The updated vehicle is returned in the response.
+- The updated quantity is successfully persisted in the database.
