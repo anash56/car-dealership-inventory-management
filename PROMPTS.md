@@ -633,3 +633,22 @@ Implement the admin-only vehicle restock endpoint using TDD so that an administr
 - The vehicle's `quantityInStock` increases by one after a successful restock.
 - The updated vehicle is returned in the response.
 - The updated quantity is successfully persisted in the database.
+
+---
+
+## Session 32 - Restock Vehicle (Vehicle Not Found)
+
+### User Prompt
+Implement the restock vehicle endpoint using TDD so that attempting to restock a non-existent vehicle returns a 404 Not Found response.
+
+### AI Assistance
+- Added a failing integration test to verify that restocking a non-existent vehicle returns a `404 Not Found` response.
+- Updated the `restockVehicle` service to verify that the requested vehicle exists before increasing its stock.
+- Threw a `Vehicle not found` error when no vehicle matched the provided ID.
+- Updated the `restockVehicleController` to return a `404 Not Found` response when the service throws a `Vehicle not found` error.
+- Reviewed the implementation and confirmed no refactoring was required.
+
+### Outcome
+- The restock endpoint now returns `404 Not Found` when the requested vehicle does not exist.
+- Existing restock functionality continues to work correctly for valid vehicles.
+- The project maintains consistent error handling across the Update, Delete, Purchase, and Restock endpoints.
