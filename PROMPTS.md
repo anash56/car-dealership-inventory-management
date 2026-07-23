@@ -652,3 +652,63 @@ Implement the restock vehicle endpoint using TDD so that attempting to restock a
 - The restock endpoint now returns `404 Not Found` when the requested vehicle does not exist.
 - Existing restock functionality continues to work correctly for valid vehicles.
 - The project maintains consistent error handling across the Update, Delete, Purchase, and Restock endpoints.
+
+---
+
+## Session 33 – Vehicle Creation (RED → GREEN → REFACTOR)
+
+### RED – Write failing test for vehicle creation
+
+#### User Prompt
+Implement the vehicle‑creation endpoint using TDD. Start by writing a failing integration test that expects an **authenticated** user to be able to `POST /api/vehicles` and receive a **201 Created** response with the created vehicle.
+
+#### AI Assistance
+- Added a new test file `src/tests/vehicle/createVehicle.test.js`.
+- The test registers a user, logs in to obtain a JWT, then calls `POST /api/vehicles` with a valid payload.
+- Expected response: `status 201` and a JSON body containing `message: "Vehicle created successfully"` and the created `vehicle` object.
+- Since the route, controller, and service do not exist yet, the test fails with **404 Not Found** (or 500), demonstrating the RED phase.
+
+#### Outcome
+- The new test fails as intended, confirming the need for implementation.
+
+---
+
+### GREEN – Implement minimum code to pass the test
+
+#### User Prompt
+Write the minimal production code required to make the failing vehicle‑creation test pass while keeping the implementation simple.
+
+#### AI Assistance
+- Added `POST /api/vehicles` route protected by the `authenticate` middleware.
+- Created `createVehicleController` in `src/controllers/vehicleController.js`:
+  - Calls `validateVehiclePayload` to check the request body.
+  - Invokes `createVehicle` service and returns `201` with a success message and the created vehicle.
+- Implemented `createVehicle` service in `src/services/vehicleService.js` using `Vehicle.create`.
+- Exported the new controller from the controller file and wired the route in the router.
+- Ran the test suite; the vehicle‑creation test now passes.
+
+#### Outcome
+- All vehicle‑creation tests succeed.
+- No other tests are broken; the full suite reports **PASS**.
+
+---
+
+### REFACTOR – Clean up and improve the implementation
+
+#### User Prompt
+Refactor the vehicle‑creation code to improve readability and maintainability without changing behavior. Move validation logic to the service layer, add proper error handling, and ensure consistent import ordering.
+
+#### AI Assistance
+- Extracted payload validation into `createVehicleService`:
+  - Service now calls `validateVehiclePayload` before persisting.
+  - Returns the created vehicle or throws an error with a clear message.
+- Updated `createVehicleController` to simply call the service and handle caught errors:
+  - Returns `400` for validation errors, `500` for unexpected failures.
+- Added missing imports (`mongoose`, `Vehicle`) and ordered them alphabetically.
+- Introduced JSDoc comments for both controller and service functions.
+- Ran the full test suite to verify that behavior remains unchanged.
+
+#### Outcome
+- Codebase is cleaner, with validation centralized in the service layer.
+- All tests (including the new create‑vehicle tests) continue to pass.
+- Future maintenance is simpler because business logic lives in the service.
