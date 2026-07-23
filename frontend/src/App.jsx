@@ -5,6 +5,8 @@ import LoginPage from './pages/Login';
 import RegisterPage from './pages/Register';
 import DashboardPage from './pages/Dashboard';
 import AdminPage from './pages/Admin';
+import NavBar from './components/NavBar';
+import HomePage from './pages/Home';
 
 // Guard for authenticated routes
 const ProtectedRoute = ({ children }) => {
@@ -20,16 +22,21 @@ const AdminRoute = ({ children }) => {
 
 const App = () => (
   <AuthProvider>
+    <NavBar />
     <Router>
       <Routes>
+        <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route
           path="/"
           element={
-            <ProtectedRoute>
-              <DashboardPage />
-            </ProtectedRoute>
+            <>{
+              // Show Home for unauthenticated users, otherwise Dashboard
+              <ProtectedRoute>
+                <DashboardPage />
+              </ProtectedRoute>
+            }</>
           }
         />
         <Route

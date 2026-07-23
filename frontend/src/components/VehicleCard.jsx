@@ -2,7 +2,7 @@
 import React from 'react';
 import { Button } from './Button';
 
-const VehicleCard = ({ vehicle, onPurchase, isAdmin, onEdit, onDelete }) => {
+const VehicleCard = ({ vehicle, onPurchase, isAdmin, onEdit, onDelete, children }) => {
   const { _id, make, model, category, price, quantity } = vehicle;
   return (
     <div className="bg-white p-4 rounded shadow hover:shadow-lg transition">
@@ -18,6 +18,8 @@ const VehicleCard = ({ vehicle, onPurchase, isAdmin, onEdit, onDelete }) => {
       >
         {quantity === 0 ? 'Out of Stock' : 'Purchase'}
       </Button>
+
+      {children}
 
       {isAdmin && (
         <div className="mt-2 flex gap-2">
