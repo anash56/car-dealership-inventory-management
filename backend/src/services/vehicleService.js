@@ -79,3 +79,15 @@ export const purchaseVehicle = async (id) => {
     return vehicle;
 
 };
+
+export const restockVehicle = async (id) => {
+
+    const vehicle = await Vehicle.findById(id);
+
+    vehicle.quantityInStock++;
+
+    await vehicle.save();
+
+    return vehicle;
+
+};
