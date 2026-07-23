@@ -1,5 +1,5 @@
 // src/pages/Admin.jsx
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getVehicles, addVehicle, updateVehicle, deleteVehicle, restockVehicle } from '../api/vehicleApi';
 import VehicleCard from '../components/VehicleCard';
 import { Button } from '../components/Button';

@@ -1,5 +1,6 @@
-// src/store/authStore.js
-import React, { createContext, useContext, useState, useEffect } from 'react';
+// src/context/AuthContext.jsx
+/* eslint-disable react-refresh/only-export-components */
+import { createContext, useContext, useState, useEffect } from 'react';
 import { getCurrentUser, logout } from '../utils/authService';
 
 const AuthContext = createContext(null);
@@ -9,12 +10,15 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(null);
 
   useEffect(() => {
-    const storedUser = getCurrentUser();
-    const storedToken = localStorage.getItem('token');
-    if (storedUser && storedToken) {
-      setUser(storedUser);
-      setToken(storedToken);
-    }
+    const init = () => {
+      const storedUser = getCurrentUser();
+      const storedToken = localStorage.getItem('token');
+      if (storedUser && storedToken) {
+        setUser(storedUser);
+        setToken(storedToken);
+      }
+    };
+    init();
   }, []);
 
   const handleLogout = () => {
@@ -23,7 +27,7 @@ export const AuthProvider = ({ children }) => {
     setToken(null);
   };
 
-  const isAdmin = user && user.role === 'admin'; // assumes backend includes role
+  const isAdmin = user && user.role === 'admin';
 
   return (
     <AuthContext.Provider value={{ user, token, setUser, setToken, logout: handleLogout, isAdmin }}>

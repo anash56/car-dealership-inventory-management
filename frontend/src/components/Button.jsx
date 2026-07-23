@@ -1,5 +1,6 @@
 // src/components/Button.jsx
-import React from 'react';
+// src/components/Button.jsx
+
 
 export const Button = ({ children, onClick, disabled, type = 'button', className = '' }) => (
   <button

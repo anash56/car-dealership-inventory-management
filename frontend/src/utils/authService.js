@@ -2,8 +2,13 @@
 import api from '../api/api';
 
 export const register = async (data) => {
-  const response = await api.post('/api/auth/register', data);
-  return response.data;
+  try {
+    const response = await api.post('/api/auth/register', data);
+    return response.data;
+  } catch (err) {
+    const message = err.response?.data?.message || err.message || 'Registration failed';
+    throw new Error(message);
+  }
 };
 
 export const login = async (credentials) => {

@@ -1,11 +1,12 @@
 import express from "express";
+import cors from 'cors';
 import authRoutes from "./routes/authRoutes.js";
 import { authenticate } from "./middleware/authMiddleware.js";
 import { adminOnly } from "./middleware/adminMiddleware.js";
 import vehicleRoutes from "./routes/vehicleRoutes.js";
 
 const app = express();
-
+app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {

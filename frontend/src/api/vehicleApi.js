@@ -3,6 +3,11 @@ import api from './api';
 
 export const getVehicles = async (params = {}) => {
   const response = await api.get('/api/vehicles', { params });
+  return response.data.vehicles;
+};
+
+export const getVehicle = async (id) => {
+  const response = await api.get(`/api/vehicles/${id}`);
   return response.data;
 };
 

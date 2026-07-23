@@ -1,7 +1,7 @@
 // src/components/NavBar.jsx
-import React from 'react';
+
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../store/authStore';
+import { useAuth } from '../store/authStore.jsx';
 import { Button } from './Button';
 
 const NavBar = () => {
@@ -21,7 +21,7 @@ const NavBar = () => {
         </Link>
         {token && (
           <>
-            <Link to="/" className="hover:underline">
+            <Link to="/dashboard" className="hover:underline">
               Dashboard
             </Link>
             {isAdmin && (
@@ -35,7 +35,7 @@ const NavBar = () => {
       <div className="flex items-center space-x-4">
         {token ? (
           <>
-            <span className="mr-2">{user?.email || 'User'}</span>
+            <span className="mr-2">{user?.email || 'User'}{isAdmin && ' (Admin)'}</span>
             <Button onClick={handleLogout} className="bg-red-500 hover:bg-red-600">
               Logout
             </Button>

@@ -1,6 +1,6 @@
-import React from 'react';
+// import React removed - not needed with new JSX transform
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { AuthProvider, useAuth } from './store/authStore';
+import { AuthProvider, useAuth } from './store/authStore.jsx';
 import LoginPage from './pages/Login';
 import RegisterPage from './pages/Register';
 import DashboardPage from './pages/Dashboard';
@@ -22,23 +22,13 @@ const AdminRoute = ({ children }) => {
 
 const App = () => (
   <AuthProvider>
-    <NavBar />
-    <Router>
-      <Routes>
+      <Router>
+        <NavBar />
+        <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
-        <Route
-          path="/"
-          element={
-            <>{
-              // Show Home for unauthenticated users, otherwise Dashboard
-              <ProtectedRoute>
-                <DashboardPage />
-              </ProtectedRoute>
-            }</>
-          }
-        />
+        <Route path="/dashboard" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
         <Route
           path="/admin"
           element={

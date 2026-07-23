@@ -1,23 +1,25 @@
 // src/pages/Register.jsx
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { register } from '../utils/authService';
 import { Button } from '../components/Button';
+import { Link } from 'react-router-dom';
 
 const RegisterPage = () => {
   const navigate = useNavigate();
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await register({ email, password });
+      await register({ name, email, password });
       alert('Registration successful! Please log in.');
       navigate('/login');
     } catch (err) {
       console.error('Register error', err);
-      alert('Registration failed');
+      alert(err.message || 'Registration failed');
     }
   };
 
@@ -28,6 +30,14 @@ const RegisterPage = () => {
         className="bg-white p-8 rounded shadow-md w-96"
       >
         <h2 className="text-2xl mb-4 text-center">Register</h2>
+        <input
+          type="text"
+          placeholder="Name"
+          className="w-full border p-2 mb-4 rounded"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+        />
         <input
           type="email"
           placeholder="Email"
@@ -45,6 +55,9 @@ const RegisterPage = () => {
           required
         />
         <Button type="submit" className="w-full">Register</Button>
+        <p className="text-center mt-4">
+          Already have an account? <Link to="/login" className="text-blue-600 hover:underline">Login</Link>
+        </p>
       </form>
     </div>
   );

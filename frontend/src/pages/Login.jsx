@@ -1,9 +1,10 @@
 // src/pages/Login.jsx
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../utils/authService';
 import { useAuth } from '../store/authStore';
 import { Button } from '../components/Button';
+import { Link } from 'react-router-dom';
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ const LoginPage = () => {
       const { token, user } = await login({ email, password });
       setToken(token);
       setUser(user);
-      navigate('/');
+      navigate('/dashboard');
     } catch (err) {
       console.error('Login error', err);
       alert('Login failed');
@@ -48,6 +49,9 @@ const LoginPage = () => {
           required
         />
         <Button type="submit" className="w-full">Sign In</Button>
+        <p className="text-center mt-4">
+          Don’t have an account? <Link to="/register" className="text-blue-600 hover:underline">Register</Link>
+        </p>
       </form>
     </div>
   );
