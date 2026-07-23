@@ -5,7 +5,8 @@ export const createVehicle = async (vehicleData) => {
 };
 
 export const getAllVehicles = async () => {
-    return await Vehicle.find().sort({ createdAt: 1 });
+    // Sort by _id to ensure deterministic order
+    return await Vehicle.find().sort({ _id: 1 });
 };
 
 export const searchVehicles = async (query) => {

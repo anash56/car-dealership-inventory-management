@@ -7,27 +7,13 @@ import {
     purchaseVehicle,
     restockVehicle,
 } from "../services/vehicleService.js";
-import Vehicle from "../models/Vehicle.js";
-import mongoose from "mongoose";
 
-// Helper to validate vehicle payload (case‑insensitive)
-const validateVehiclePayload = (payload) => {
-    // Enforce case‑sensitive required fields
-    const requiredKeys = ["make", "model", "category", "price", "quantityInStock"];
-    for (const key of requiredKeys) {
-        if (!Object.prototype.hasOwnProperty.call(payload, key)) {
-            return "Make, model, category, price, and quantity in stock are required";
-        }
-    }
-    const { price, quantityInStock } = payload;
-    if (price <= 0) {
-        return "Price must be a positive number";
-    }
-    if (!Number.isInteger(quantityInStock) || quantityInStock < 0) {
-        return "Quantity in stock must be a non-negative integer";
-    }
-    return null;
-};
+import { validateVehiclePayload } from "../utils/vehicleValidation.js";
+import mongoose from "mongoose";
+import Vehicle from "../models/Vehicle.js";
+
+
+
 
 export const createVehicleController = async (req, res) => {
     const validationError = validateVehiclePayload(req.body);
@@ -77,17 +63,17 @@ export const searchVehiclesController = async (req, res) => {
 };
 
 export const updateVehicleController = async (req, res) => {
-    const id = req.params.id;
-    // If id is a valid ObjectId, check existence first
+    const { id } = req.params;
+    // If id is a valid ObjectId, check existence first to return 404 before validation when appropriate
     if (mongoose.Types.ObjectId.isValid(id)) {
         try {
-            const existingVehicle = await Vehicle.findById(id);
-            if (!existingVehicle) {
+            const existing = await Vehicle.findById(id);
+            if (!existing) {
                 return res.status(404).json({ message: "Vehicle not found" });
             }
         } catch (err) {
-            // Treat any DB errors as not found
-            return res.status(404).json({ message: "Vehicle not found" });
+            // If DB error occurs, treat as 500
+            return res.status(500).json({ message: err.message });
         }
     }
     // Validate payload (required fields)
@@ -95,11 +81,11 @@ export const updateVehicleController = async (req, res) => {
     if (validationError) {
         return res.status(400).json({ message: validationError });
     }
-    // Proceed with update
     try {
         const updatedVehicle = await updateVehicle(id, req.body);
         return res.status(200).json({ vehicle: updatedVehicle });
     } catch (error) {
+        // This block now handles unexpected errors (service should not throw not-found here for valid id)
         return res.status(500).json({ message: error.message });
     }
 };
